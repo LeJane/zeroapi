@@ -3,14 +3,15 @@ package zeroapi
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"time"
+
 	"github.com/fullstorydev/grpcurl"
 	"github.com/golang/protobuf/proto" //lint:ignore SA1019 we have to import this because it appears in exported API
 	"github.com/jhump/protoreflect/dynamic"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"net/http"
-	"time"
 )
 
 type ResponseHandler func(in proto.Message) (code int, msg string, data interface{})

@@ -1,18 +1,16 @@
 package zeroapi
 
 import (
-	"github.com/zeromicro/go-zero/core/service"
-	"github.com/zeromicro/go-zero/rest"
-	"github.com/zeromicro/go-zero/zrpc"
 	"net/http"
 	"path"
-	"strings"
 	"time"
+
+	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type (
 	GatewayEngine struct {
-		RestConf    rest.RestConf
 		Config      Config
 		prefix      string
 		router      *router
@@ -33,15 +31,9 @@ func (r *router) add(s string, url string, rpcPath string, fs ...OptionFunc) {
 	})
 }
 
-func Engine(serviceConf service.ServiceConf, conf Config, protoSets ...[]byte) *GatewayEngine {
-	restConf := rest.RestConf{
-		ServiceConf: serviceConf,
-		Host:        "0.0.0.0",
-		Port:        conf.Port,
-		Timeout:     conf.CallRpcTimeoutSeconds * 1000,
-	}
+func Engine(conf Config, protoSets ...[]byte) *GatewayEngine {
+
 	return &GatewayEngine{
-		RestConf:  restConf,
 		Config:    conf,
 		router:    &router{},
 		ProtoSets: protoSets,
@@ -66,7 +58,7 @@ func (e *GatewayEngine) Server(serverOptions ...rest.RunOption) *Server {
 		}
 	}))
 	svr := &Server{
-		Server:    rest.MustNewServer(e.RestConf, serverOptions...),
+		Server:    rest.MustNewServer(e.Config.RestConf, serverOptions...),
 		upstreams: e.Upstreams(),
 		timeout:   time.Duration(e.Config.CallRpcTimeoutSeconds) * time.Second,
 	}
@@ -76,6 +68,8 @@ func (e *GatewayEngine) Server(serverOptions ...rest.RunOption) *Server {
 	for _, opt := range opts {
 		opt(svr)
 	}
+
+	svr.Start()
 	return svr
 }
 
@@ -85,7 +79,6 @@ func (e *GatewayEngine) formatPrefix(prefix string) string {
 
 func (e *GatewayEngine) Group(prefix string) (n *GatewayEngine) {
 	n = &GatewayEngine{
-		RestConf:  e.RestConf,
 		Config:    e.Config,
 		prefix:    e.formatPrefix(prefix),
 		router:    e.router,
@@ -116,16 +109,13 @@ func (e *GatewayEngine) PATCH(url string, handler interface{}, optionFs ...Optio
 }
 
 func (e *GatewayEngine) Upstreams() []upstream {
-	endpoint := e.Config.RpcListenOn
-	if strings.HasPrefix(endpoint, ":") {
-		endpoint = "127.0.0.1" + endpoint
-	}
+
 	return []upstream{{
 		Grpc: zrpc.RpcClientConf{
-			Endpoints: []string{endpoint},
+			Endpoints: []string{e.Config.RpcListenOn},
 			NonBlock:  true,
 		},
 		ProtoSets: e.ProtoSets,
-		Mapping:   e.router.routers,
+		Mappings:  e.router.routers,
 	}}
 }

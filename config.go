@@ -1,16 +1,17 @@
 package zeroapi
 
 import (
+	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type (
 	// Config is the configuration for gateway.
 	Config struct {
+		rest.RestConf
 		PbGroup               string // 比如用户服务是 pb.userService
 		RpcListenOn           string // 比如用户服务是 :8080
 		CallRpcTimeoutSeconds int64  `json:",default=10"`
-		Port                  int    `json:",default=9000"`
 	}
 	// RouteMapping is a mapping between a gateway route and an upstream rpc method.
 	RouteMapping struct {
@@ -31,6 +32,6 @@ type (
 		ProtoSets [][]byte `json:",optional"`
 		// Mapping is the mapping between gateway routes and upstream rpc methods.
 		// Keep it blank if annotations are added in rpc methods.
-		Mapping []RouteMapping `json:",optional"`
+		Mappings []RouteMapping `json:",optional"`
 	}
 )
