@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/showurl/zeroapi/examples/hello/internal/logic"
-	"github.com/showurl/zeroapi/examples/hello/internal/svc"
-	"github.com/showurl/zeroapi/examples/hello/pb"
+	"github.com/LeJane/zeroapi/examples/hello/internal/logic"
+	"github.com/LeJane/zeroapi/examples/hello/internal/svc"
+	"github.com/LeJane/zeroapi/examples/hello/pb"
 )
 
 type StreamGreeterServer struct {

@@ -1,6 +1,6 @@
 package svc
 
-import "github.com/showurl/zeroapi/examples/hello/internal/config"
+import "github.com/LeJane/zeroapi/examples/hello/internal/config"
 
 type ServiceContext struct {
 	Config config.Config

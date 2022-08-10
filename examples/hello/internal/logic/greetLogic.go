@@ -5,8 +5,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/showurl/zeroapi/examples/hello/internal/svc"
-	"github.com/showurl/zeroapi/examples/hello/pb"
+	"github.com/LeJane/zeroapi/examples/hello/internal/svc"
+	"github.com/LeJane/zeroapi/examples/hello/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

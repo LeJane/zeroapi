@@ -1,11 +1,12 @@
 package server
 
 import (
-	"github.com/showurl/zeroapi"
-	"github.com/showurl/zeroapi/examples/hello/internal/middleware"
-	"github.com/showurl/zeroapi/examples/hello/pb"
-	"github.com/zeromicro/go-zero/rest"
 	"log"
+
+	"github.com/LeJane/zeroapi"
+	"github.com/LeJane/zeroapi/examples/hello/internal/middleware"
+	"github.com/LeJane/zeroapi/examples/hello/pb"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 func (s *StreamGreeterServer) routeV1(group *zeroapi.GatewayEngine) {

@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/showurl/zeroapi/examples/hello/internal/config"
-	"github.com/showurl/zeroapi/examples/hello/internal/server"
-	"github.com/showurl/zeroapi/examples/hello/internal/svc"
-	"github.com/showurl/zeroapi/examples/hello/pb"
+	"github.com/LeJane/zeroapi/examples/hello/internal/config"
+	"github.com/LeJane/zeroapi/examples/hello/internal/server"
+	"github.com/LeJane/zeroapi/examples/hello/internal/svc"
+	"github.com/LeJane/zeroapi/examples/hello/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

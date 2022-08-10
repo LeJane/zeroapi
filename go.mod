@@ -1,4 +1,4 @@
-module github.com/showurl/zeroapi
+module github.com/LeJane/zeroapi
 
 go 1.18
 

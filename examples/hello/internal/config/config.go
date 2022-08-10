@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/showurl/zeroapi"
+	"github.com/LeJane/zeroapi"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 

@@ -6,7 +6,7 @@ package streamgreeter
 import (
 	"context"
 
-	"github.com/showurl/zeroapi/examples/hello/pb"
+	"github.com/LeJane/zeroapi/examples/hello/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
